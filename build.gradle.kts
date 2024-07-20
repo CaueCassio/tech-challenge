@@ -22,7 +22,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.webjars:webjars-locator:0.40")
     implementation("io.github.classgraph:classgraph:4.8.104")
-
+    implementation("org.springdoc:springdoc-openapi-ui:1.5.9")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.5.9")
     implementation("org.springdoc:springdoc-openapi-ui:1.5.9")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.5.9")
 

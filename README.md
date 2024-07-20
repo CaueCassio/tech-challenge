@@ -224,6 +224,8 @@ Copiar código
    ```sh
    git clone https://github.com/CaueCassio/tech-challenge.git
    cd vehicle-sale-application
+   
+
 Construa e execute a aplicação:
 
 sh
@@ -231,3 +233,10 @@ Copiar código
 ./gradlew bootRun
 A aplicação estará disponível em http://localhost:8080.
 
+
+### Rodando Localmente
+Documentação da API
+A documentação interativa da API está disponível em:
+
+ ```sh
+http://localhost:8080/swagger-ui.html

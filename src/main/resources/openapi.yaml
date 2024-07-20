@@ -1,0 +1,166 @@
+openapi: 3.0.0
+info:
+  title: Vehicle Sale Application API
+  description: API para gerenciamento de vendas de veículos, incluindo funcionalidades para cadastrar, editar, listar veículos e processar vendas e webhooks de pagamento.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+
+paths:
+  /veiculos:
+    post:
+      summary: Criar Veículo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Veiculo'
+      responses:
+        '201':
+          description: Veículo criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Veiculo'
+    get:
+      summary: Listar Veículos
+      parameters:
+        - in: query
+          name: vendido
+          schema:
+            type: boolean
+          description: Filtro para veículos vendidos
+      responses:
+        '200':
+          description: Lista de veículos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Veiculo'
+  /veiculos/{id}:
+    put:
+      summary: Editar Veículo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID do veículo a ser editado
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Veiculo'
+      responses:
+        '201':
+          description: Veículo editado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Veiculo'
+  /veiculos/venda:
+    post:
+      summary: Efetuar Venda
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venda'
+      responses:
+        '201':
+          description: Venda efetuada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venda'
+  /webhook/pagamento:
+    post:
+      summary: Processar Pagamento
+      parameters:
+        - in: query
+          name: codigo
+          required: true
+          schema:
+            type: string
+          description: Código de pagamento
+        - in: query
+          name: status
+          required: true
+          schema:
+            type: string
+          description: Status do pagamento
+      responses:
+        '200':
+          description: Pagamento processado com sucesso
+
+components:
+  schemas:
+    Veiculo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do veículo
+        marca:
+          type: string
+          description: Marca do veículo
+        modelo:
+          type: string
+          description: Modelo do veículo
+        ano:
+          type: integer
+          description: Ano do veículo
+        cor:
+          type: string
+          description: Cor do veículo
+        preco:
+          type: number
+          description: Preço do veículo
+        vendido:
+          type: boolean
+          description: Status de venda do veículo
+      required:
+        - marca
+        - modelo
+        - ano
+        - cor
+        - preco
+    Venda:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID da venda
+        veiculoId:
+          type: integer
+          description: ID do veículo
+        cpfComprador:
+          type: string
+          description: CPF do comprador
+        dataVenda:
+          type: string
+          format: date-time
+          description: Data da venda
+        precoVenda:
+          type: number
+          description: Preço de venda
+        codigoPagamento:
+          type: string
+          description: Código de pagamento
+        statusPagamento:
+          type: string
+          description: Status do pagamento
+      required:
+        - veiculoId
+        - cpfComprador
+        - dataVenda
+        - precoVenda
+        - codigoPagamento
