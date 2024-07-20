@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-sale-application
+  labels:
+    app: vehicle-sale-application
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vehicle-sale-application
+  template:
+    metadata:
+      labels:
+        app: vehicle-sale-application
+    spec:
+      containers:
+        - name: vehicle-sale-application
+          image: cassiocaue/vehicle-sale-application:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"

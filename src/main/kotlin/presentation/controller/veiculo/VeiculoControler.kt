@@ -1,9 +1,10 @@
 package org.example.presentation.controller.veiculo
 
-import org.example.application.useCase.CadastrarVeiculoUseCase
-import org.example.application.useCase.EditarVeiculoUseCase
-import org.example.application.useCase.EfetuarVendaUseCase
-import org.example.application.useCase.ListaVeiculosUseCase
+
+import org.example.application.useCase.veiculos.CadastrarVeiculoUseCase
+import org.example.application.useCase.veiculos.EditarVeiculoUseCase
+import org.example.application.useCase.veiculos.EfetuarVendaUseCase
+import org.example.application.useCase.veiculos.ListaVeiculosUseCase
 import org.example.domain.entity.Veiculo.Veiculo
 import org.example.domain.entity.Venda.Venda
 import org.springframework.http.HttpStatus
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/veiculos")
-class VeiculoControler (
+class VeiculoController (
 
     private val cadastrarVeiculoUseCase: CadastrarVeiculoUseCase,
     private val editarVeiculoUseCase: EditarVeiculoUseCase,
@@ -29,7 +30,7 @@ class VeiculoControler (
 
     @PutMapping("/{id}")
     fun editarVeiculo(@PathVariable id: Long, @RequestBody veiculo: Veiculo): ResponseEntity<Veiculo> {
-        val veiculo = cadastrarVeiculoUseCase.execute(veiculo.copy(id = id))
+        val veiculo = editarVeiculoUseCase.execute(veiculo.copy(id = id))
         return ResponseEntity.status(HttpStatus.CREATED).body(veiculo)
     }
 
