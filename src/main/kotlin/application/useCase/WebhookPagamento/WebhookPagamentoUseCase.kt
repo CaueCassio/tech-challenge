@@ -2,7 +2,10 @@ package org.example.application.useCase.WebhookPagamento
 
 import org.example.domain.entity.Venda.StatusPagamento
 import org.example.domain.repository.vendaRepository.VendaRepository
+import org.springframework.stereotype.Service
 
+
+@Service
 class WebhookPagamentoUseCase(private val vendaRepository: VendaRepository) {
 
     fun execute(codigoPagamento: String, status: String) {

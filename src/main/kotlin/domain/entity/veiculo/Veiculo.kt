@@ -7,6 +7,6 @@ data class Veiculo(
     val ano: Int,
     val cor: String,
     val preco: Double,
-    val vendido: Boolean = false
+    var vendido: Boolean = false
 
 )
