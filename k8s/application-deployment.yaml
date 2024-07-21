@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-sale-application
+  labels:
+    app: vehicle-sale-application
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vehicle-sale-application
+  template:
+    metadata:
+      labels:
+        app: vehicle-sale-application
+    spec:
+      containers:
+        - name: vehicle-sale-application
+          image: cassiocaue/vehicle-sale-application:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:h2:mem:tech-challenger"
+            - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+              value: "org.h2.Driver"
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: "update"
+            - name: SPRING_JPA_SHOW_SQL
+              value: "true"
+            - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+              value: "org.hibernate.dialect.H2Dialect"
+            - name: SPRING_H2_CONSOLE_ENABLED
+              value: "true"
+            - name: SPRING_H2_CONSOLE_PATH
+              value: "/h2-console"
+            - name: SPRING_FLYWAY_ENABLED
+              value: "true"
+            - name: SPRING_FLYWAY_URL
+              value: "jdbc:h2:mem:tech-challenger"
+          envFrom:
+            - secretRef:
+                name: vehicle-sale-secret
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
