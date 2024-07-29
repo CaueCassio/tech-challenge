@@ -1,4 +1,4 @@
-package org.example.application.useCase.veiculos
+package org.example.application.useCase.venda
 
 import org.example.domain.entity.Venda.Venda
 import org.example.domain.repository.veiculoRepository.VeiculoRepository
