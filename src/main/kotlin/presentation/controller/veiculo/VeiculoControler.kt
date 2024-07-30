@@ -3,7 +3,7 @@ package org.example.presentation.controller.veiculo
 
 import org.example.application.useCase.veiculos.CadastrarVeiculoUseCase
 import org.example.application.useCase.veiculos.EditarVeiculoUseCase
-import org.example.application.useCase.veiculos.EfetuarVendaUseCase
+import org.example.application.useCase.venda.EfetuarVendaUseCase
 import org.example.application.useCase.veiculos.ListaVeiculosUseCase
 import org.example.domain.entity.Veiculo.Veiculo
 import org.example.domain.entity.Venda.Venda
