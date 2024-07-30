@@ -111,4 +111,9 @@ Opcionalmente, você pode incluir a estrutura de diretórios do projeto para aju
 
 2. Usando Docker:
    ```sh
-
+    docker compose up
+   ```
+3. Acessando o Swagger:
+   ```sh
+   http://localhost:8080/swagger-ui.html
+   ```
